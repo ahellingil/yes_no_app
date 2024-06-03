@@ -19,7 +19,7 @@ class HerMessageBubble extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
               'Pues ${message.text}',
-              style: const TextStyle(color: Colors.white),
+              style: TextStyle(color: colors.secondaryContainer),
             ),
           ),
         ),
@@ -37,6 +37,7 @@ class _ImageBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
@@ -48,11 +49,28 @@ class _ImageBubble extends StatelessWidget {
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
           return Container(
-              width: size.width * 0.7,
-              height: 150,
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              child: Text(
-                  'Cargando ${(100 * loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!).toStringAsFixed(0)}...'));
+            width: size.width * 0.7,
+            height: 150,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                color: colors.secondaryContainer,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(
+                        value: loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!),
+                    Text(
+                      'Cargando imagen ${(100 * loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!).toStringAsFixed(0)}...',
+                      style: TextStyle(color: colors.secondary),
+                    ),
+                  ],
+                ),
+              ),
+            ), //
+          );
         },
       ),
     );

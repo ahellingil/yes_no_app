@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Adivineitor',
         debugShowCheckedModeBanner: false,
-        theme: AppTheme(selectedColor: 4).theme(),
+        theme: AppTheme(selectedColor: AppThemeColor.blue).theme(),
         home: const ChatScreen(),
       ),
     );
