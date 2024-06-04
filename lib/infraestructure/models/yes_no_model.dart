@@ -12,7 +12,7 @@ class YesNoModel {
   });
 
   factory YesNoModel.fromJsonMap(Map<String, dynamic> json) => YesNoModel(
-        answer: json["answer"],
+        answer: json["answer"] ?? 'No',
         forced: json["forced"],
         image: json["image"],
       );
